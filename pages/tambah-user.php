@@ -61,7 +61,7 @@ if (isset($_POST["simpan"])) {
                         <button class="btn btn-primary" type="submit" name="<?php echo ($id) ? 'update' : 'simpan' ?>">
                             <?php echo ($id) ? "Simpan Perubahan" : "Simpan" ?>
                         </button>
-                        <a href="?page=user" class="text-muted">Back</a>
+                        <a href="?page=user" class="btn btn-secondary">Back</a>
                     </div>
                 </form>
             </div>
