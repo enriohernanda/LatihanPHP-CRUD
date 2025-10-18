@@ -3,7 +3,7 @@
 // include_once
 // require_once
 // require
-require_once 'koneksi.php';
+require_once 'config/koneksi.php';
 
 $query = mysqli_query($koneksi, "SELECT r.name AS role_name, u.* FROM users u LEFT JOIN roles AS r ON r.id = u.role_id WHERE u.deleted_at IS NOT NULL ORDER BY u.id DESC");
 $users = mysqli_fetch_all($query, MYSQLI_ASSOC);
