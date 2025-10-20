@@ -3,9 +3,8 @@
 // include_once
 // require_once
 // require
-require_once "config/koneksi.php";
 
-$query = mysqli_query($koneksi, "SELECT r.name AS role_name, u.* FROM users u LEFT JOIN roles r ON r.id = u.role_id WHERE deleted_at IS NULL ORDER BY u.id DESC");
+$query = mysqli_query($koneksi, "SELECT r.name AS role_name, u.* FROM users u LEFT JOIN roles AS r ON r.id = u.role_id WHERE u.deleted_at IS NOT NULL ORDER BY u.id DESC");
 $users = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 // disini parameter delete
@@ -13,10 +12,16 @@ $users = mysqli_fetch_all($query, MYSQLI_ASSOC);
 // isset, empty
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $delete = mysqli_query($koneksi, "UPDATE users SET deleted_at=now() WHERE id = '$id'");
+    $delete = mysqli_query($koneksi, "DELETE FROM users WHERE id='$id'");
 
     // redirect
     header("location:?page=user&hapus=berhasil");
+}
+
+if (isset($_GET['restore'])) {
+    $id = $_GET['restore'];
+    $restore = mysqli_query($koneksi, "UPDATE users SET deleted_at=null WHERE id='$id'");
+    header("location:?page=user");
 }
 
 ?>
@@ -25,10 +30,10 @@ if (isset($_GET['delete'])) {
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Data User</h3>
+                <h1 class="card-title">Data User Restore</h1>
                 <div class="mb-3" align="right">
-                    <a href="?page=tambah-user" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Add User
+                    <a class="btn btn-primary" href="?page=user">
+                        <i class="bi bi-skip-backward"></i> Back
                     </a>
                 </div>
                 <table class="table table-bordered table-striped">
@@ -50,12 +55,14 @@ if (isset($_GET['delete'])) {
                                 <td><?php echo $value['role_name'] ?></td>
                                 <td>
                                     <a class="btn btn-success btn-sm"
-                                        href="?page=tambah-user&edit=<?php echo $value['id'] ?>">
-                                        <i class="bi bi-pencil"></i>
+                                        onclick="return confirm('Are you sure you want to restore?')"
+                                        href="?page=user-restore&restore=<?php echo $value['id'] ?>"><i
+                                            class="bi bi-arrow-clockwise">
+                                        </i>
                                     </a>
                                     <a class="btn btn-warning btn-sm"
                                         onclick="return confirm('Are you sure you want to delete this data?')"
-                                        href="?page=user&delete=<?php echo $value['id'] ?>">
+                                        href="?page=user-restore&delete=<?php echo $value['id'] ?>">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>

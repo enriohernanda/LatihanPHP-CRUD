@@ -16,7 +16,7 @@ if (isset($_POST['update'])) {
         $query = mysqli_query($koneksi, "UPDATE users SET name='$name', email='$email' WHERE id='$id'");
     }
     if ($query) {
-        header("location:user.php?ubah=berhasil");
+        header("location:?page=user&ubah=berhasil");
     }
 }
 
@@ -28,7 +28,7 @@ if (isset($_POST["simpan"])) {
     $query = mysqli_query($koneksi, "INSERT INTO users (name, email, password) VALUES('$name', '$email', '$password')");
 
     if ($query) {
-        header("location:user.php?tambah=berhasil");
+        header("location:?page=user&tambah=berhasil");
     }
 }
 
@@ -53,13 +53,13 @@ if (isset($_POST["simpan"])) {
                             required value="<?php echo $rowEdit['email'] ?? '' ?>">
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label fw-bold">Password * <small>Kosongkan jika tidak ingin
-                                mengubah</small></label>
+                        <label for="" class="form-label fw-bold">Password * <small>Leave blank if you don't want to
+                                change</small></label>
                         <input class="form-control" type="password" name="password" placeholder="Enter Your Password">
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-primary" type="submit" name="<?php echo ($id) ? 'update' : 'simpan' ?>">
-                            <?php echo ($id) ? "Simpan Perubahan" : "Simpan" ?>
+                        <button class="btn btn-primary" type="submit" name="<?php echo ($id) ? 'update' : 'save' ?>">
+                            <?php echo ($id) ? "Save Changes" : "Save" ?>
                         </button>
                         <a href="?page=user" class="btn btn-secondary">Back</a>
                     </div>
