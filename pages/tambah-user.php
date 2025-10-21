@@ -8,7 +8,7 @@ if (isset($_POST['update'])) {
     //$_POST ambil simbol inputan
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = sha1($_POST['password']);
 
     if ($password) {
         $query = mysqli_query($koneksi, "UPDATE users SET name='$name', email='$email', password='$password' WHERE id='$id'");
@@ -20,10 +20,10 @@ if (isset($_POST['update'])) {
     }
 }
 
-if (isset($_POST["simpan"])) {
+if (isset($_POST["save"])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = sha1($_POST['password']);
 
     $query = mysqli_query($koneksi, "INSERT INTO users (name, email, password) VALUES('$name', '$email', '$password')");
 

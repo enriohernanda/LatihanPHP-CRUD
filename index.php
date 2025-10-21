@@ -6,6 +6,7 @@ require_once 'config/koneksi.php';
 if (isset($_POST['login'])) {
     $email = trim($_POST['email']); //trim untuk handle spasi / menghapus spasi
     $password = trim($_POST['password']);
+    $sha = sha1($password);
 
     $query = mysqli_query($koneksi, "SELECT * FROM users WHERE email='$email'");
 
@@ -16,7 +17,7 @@ if (isset($_POST['login'])) {
         // mengambil data hasil query di dalam table
         $user = mysqli_fetch_assoc($query);
         // jika password yang di input user sama dengan yang ada ditable
-        if ($password === $user['password']) {
+        if ($sha === $user['password']) {
             $_SESSION['ID'] = $user['id'];
             $_SESSION['NAME'] = $user['name'];
             header("location:home.php");
