@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2025 at 10:04 AM
+-- Generation Time: Oct 21, 2025 at 10:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,7 +64,6 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_code`, `order_date`, `order_amout`, `order_change`, `order_status`) VALUES
-(1, 'ABC-20250801', '2025-10-24 14:28:51', NULL, NULL, 0),
 (2, 'ABC-20250802', '2025-10-21 14:28:51', NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -87,8 +86,6 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `order_price`, `order_subtotal`) VALUES
-(1, 1, 1, 1, 10000.00, 10000.00),
-(2, 1, 1, 1, 10000.00, 10000.00),
 (3, 2, 2, 2, 25000.00, 25000.00);
 
 -- --------------------------------------------------------
