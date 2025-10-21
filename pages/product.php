@@ -48,8 +48,7 @@ if (isset($_GET['delete'])) {
                                 <td><?php echo $v['c_name'] ?></td>
                                 <td><?php echo $v['product_name'] ?></td>
                                 <td class="text-center">
-                                    <img class="rounded" src="<?php echo $v['product_photo'] ?>" width="150" height="115"
-                                        alt="">
+                                    <img class="rounded" src="<?php echo $v['product_photo'] ?>" width="115" alt="">
                                 </td>
                                 <td>Rp. <?php echo number_format($v['product_price'], 2, ',', '.') ?></td>
                                 <td class="text-center">
