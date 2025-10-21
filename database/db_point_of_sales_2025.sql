@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2025 at 06:44 AM
+-- Generation Time: Oct 21, 2025 at 10:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,6 +47,53 @@ INSERT INTO `categories` (`id`, `category_name`, `created_at`, `updated_at`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `order_code` varchar(25) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `order_amout` decimal(10,2) DEFAULT NULL,
+  `order_change` decimal(10,2) DEFAULT NULL,
+  `order_status` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_code`, `order_date`, `order_amout`, `order_change`, `order_status`) VALUES
+(1, 'ABC-20250801', '2025-10-24 14:28:51', NULL, NULL, 0),
+(2, 'ABC-20250802', '2025-10-21 14:28:51', NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(3) NOT NULL,
+  `order_price` decimal(10,2) NOT NULL,
+  `order_subtotal` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `order_price`, `order_subtotal`) VALUES
+(1, 1, 1, 1, 10000.00, 10000.00),
+(2, 1, 1, 1, 10000.00, 10000.00),
+(3, 2, 2, 2, 25000.00, 25000.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -67,12 +114,13 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `product_name`, `product_photo`, `product_price`, `product_description`, `is_active`, `created_at`, `updated_at`) VALUES
-(10, 9, 'Cheesecake', 'assets/uploads/cheesecake.jpg', 50000.00, 'A soft cake made from cream cheese, eggs, and sugar, usually topped with a biscuit crust. It can be served with fruit, chocolate, or caramel sauce.', 0, '2025-10-20 06:35:53', '2025-10-20 06:35:53'),
+(10, 10, 'Cheesecake', 'assets/uploads/1761031003-cheesecake.jpg', 50000.00, 'A soft cake made from cream cheese, eggs, and sugar, usually topped with a biscuit crust. It can be served with fruit, chocolate, or caramel sauce.', 0, '2025-10-20 06:35:53', '2025-10-20 06:35:53'),
 (11, 9, 'Es Teler', 'assets/uploads/es_teler.jpg', 10000.00, 'A mixture of avocado, jackfruit, young coconut, and grass jelly, served with sweetened condensed milk and syrup.', 0, '2025-10-20 06:53:26', '2025-10-20 06:53:26'),
 (12, 8, 'Nasi Goreng ', 'assets/uploads/nasgor.jpg', 20000.00, 'Rice fried with onions, soy sauce, and chili sauce, often served with a fried egg, chicken, or shrimp.', 0, '2025-10-20 06:54:57', '2025-10-20 06:54:57'),
 (13, 8, 'Burger', 'assets/uploads/burger.jpg', 45000.00, 'A patty filled with roast beef, cheese, vegetables, and sauce, served with fries.', 0, '2025-10-20 07:12:49', '2025-10-20 07:12:49'),
-(15, 11, ' Milkshake', 'assets/uploads/milkshakes.jpg', 20000.00, 'A mixture of milk, ice cream, and flavorings (such as chocolate, vanilla, or strawberry), blended until smooth and creamy.', 0, '2025-10-20 07:18:30', '2025-10-20 07:18:30'),
-(16, 8, 'Ramen', 'assets/uploads/ramen.jpg', 50000.00, 'A savory noodle soup, usually topped with a boiled egg, pork, nori, and green onions.', 0, '2025-10-20 07:19:35', '2025-10-20 07:19:35');
+(21, 8, ' Milkshake', 'assets/uploads/1761030974-milkshakes.jpg', 15000.00, 'Milkshakes mantap', 0, '2025-10-21 07:16:14', '2025-10-21 07:16:14'),
+(22, 10, 'wkwkwkwk', 'assets/uploads/1761031289-mcr1.jpg', 99999999.00, 'gatau males pen beli truk', 0, '2025-10-21 07:18:33', '2025-10-21 07:18:33'),
+(23, 11, 'testingg', 'assets/uploads/1761031190-xiaomi-pad-7-pro-3840x2160-19801.jpg', 909090.00, 'hoammmm', 0, '2025-10-21 07:19:50', '2025-10-21 07:19:50');
 
 -- --------------------------------------------------------
 
@@ -140,6 +188,19 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_order_id_to_order` (`order_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -168,10 +229,22 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -184,6 +257,16 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `fk_order_id_to_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
