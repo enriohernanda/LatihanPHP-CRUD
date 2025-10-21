@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2025 at 03:28 AM
+-- Generation Time: Oct 21, 2025 at 06:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `category_name`, `created_at`, `updated_at`) VALUES
-(1, 'daging', '2025-10-17 06:22:14', '2025-10-17 06:22:14');
+(8, 'Main Courses', '2025-10-20 03:28:03', '2025-10-20 03:28:03'),
+(9, 'Desserts', '2025-10-20 03:28:12', '2025-10-20 03:28:12'),
+(10, 'Snacks', '2025-10-20 03:30:02', '2025-10-20 03:30:02'),
+(11, 'Drinks/Beverages', '2025-10-20 03:30:48', '2025-10-20 03:30:48');
 
 -- --------------------------------------------------------
 
@@ -58,6 +61,18 @@ CREATE TABLE `products` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `product_name`, `product_photo`, `product_price`, `product_description`, `is_active`, `created_at`, `updated_at`) VALUES
+(10, 9, 'Cheesecake', 'assets/uploads/cheesecake.jpg', 50000.00, 'A soft cake made from cream cheese, eggs, and sugar, usually topped with a biscuit crust. It can be served with fruit, chocolate, or caramel sauce.', 0, '2025-10-20 06:35:53', '2025-10-20 06:35:53'),
+(11, 9, 'Es Teler', 'assets/uploads/es_teler.jpg', 10000.00, 'A mixture of avocado, jackfruit, young coconut, and grass jelly, served with sweetened condensed milk and syrup.', 0, '2025-10-20 06:53:26', '2025-10-20 06:53:26'),
+(12, 8, 'Nasi Goreng ', 'assets/uploads/nasgor.jpg', 20000.00, 'Rice fried with onions, soy sauce, and chili sauce, often served with a fried egg, chicken, or shrimp.', 0, '2025-10-20 06:54:57', '2025-10-20 06:54:57'),
+(13, 8, 'Burger', 'assets/uploads/burger.jpg', 45000.00, 'A patty filled with roast beef, cheese, vegetables, and sauce, served with fries.', 0, '2025-10-20 07:12:49', '2025-10-20 07:12:49'),
+(15, 11, ' Milkshake', 'assets/uploads/milkshakes.jpg', 20000.00, 'A mixture of milk, ice cream, and flavorings (such as chocolate, vanilla, or strawberry), blended until smooth and creamy.', 0, '2025-10-20 07:18:30', '2025-10-20 07:18:30'),
+(16, 8, 'Ramen', 'assets/uploads/ramen.jpg', 50000.00, 'A savory noodle soup, usually topped with a boiled egg, pork, nori, and green onions.', 0, '2025-10-20 07:19:35', '2025-10-20 07:19:35');
 
 -- --------------------------------------------------------
 
@@ -103,10 +118,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `role_id`, `deleted_at`) VALUES
-(1, 'Enrio', 'enrio@gmail.com', '9999999', '2025-10-16 01:59:30', '2025-10-17 04:04:18', 1, NULL),
-(3, 'Prabogo', 'prabogo@gmail.com', '1234', '2025-10-16 02:09:57', '2025-10-17 04:04:22', 2, NULL),
-(5, 'jokowi', 'jokowi@gmail.com', 'ijazahasli', '2025-10-16 07:34:56', '2025-10-17 04:04:25', 2, NULL),
-(6, 'alan', 'alan@gmail.com', 'wkwkwkwk', '2025-10-16 07:53:55', '2025-10-17 06:09:56', NULL, NULL);
+(1, 'Enrio', 'enrio@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-10-16 01:59:30', '2025-10-21 03:33:18', 1, NULL),
+(3, 'enrio hernanda', 'hernanda@gmail.com', '12345678', '2025-10-16 02:09:57', '2025-10-21 01:14:34', 2, NULL),
+(5, 'enrio nanda', 'nanda@gmail.com', '13774352b79db3dd22b8a8dedf9403c69b2e6dbe', '2025-10-16 07:34:56', '2025-10-21 04:01:34', 2, NULL),
+(6, 'alan', 'alan@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-10-16 07:53:55', '2025-10-21 03:52:44', NULL, NULL),
+(9, 'budi', 'budi@gmail.com', 'budi123', '2025-10-20 01:13:21', '2025-10-20 02:06:18', NULL, '2025-10-20 09:06:18'),
+(10, 'fufufifi', 'fufufifi@gmail.com', 'fufufafa', '2025-10-20 01:46:21', '2025-10-20 02:04:16', NULL, '2025-10-20 09:04:16'),
+(12, 'uhuyyy', 'cihuy@yahoo.com', '12345678', '2025-10-20 02:04:47', '2025-10-20 02:06:26', NULL, '2025-10-20 09:06:26'),
+(13, 'roni', 'roni@icloud.com', '12345678', '2025-10-20 02:07:17', '2025-10-20 03:44:12', NULL, '2025-10-20 10:44:12'),
+(14, 'Roni', 'roni2@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-10-21 04:08:38', '2025-10-21 04:08:38', NULL, NULL),
+(15, 'aryo jmk48', 'aryojmk@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-10-21 04:11:25', '2025-10-21 04:11:25', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -144,13 +165,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -162,7 +183,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
