@@ -27,12 +27,12 @@ if (isset($_GET['delete'])) {
             <div class="card">
                 <div class="card-header">
                     <div class="card-body">
-                        <h3 class="card-title">Manage Categories</h3>
+                        <h3 class="card-title">Data Categories</h3>
                     </div>
                     <div class="card-body">
                         <div class="d-flex mb-3 justify-content-end">
                             <a href="?page=tambah-category" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Add
+                                <i class="bi bi-plus-circle"></i> Add Categories
                             </a>
                         </div>
                         <table class="table table-bordered">
@@ -44,22 +44,22 @@ if (isset($_GET['delete'])) {
                             <?php
                             foreach ($categories as $key => $category) {
                             ?>
-                            <tr>
-                                <td><?php echo $key + 1 ?></td>
-                                <td><?php echo $category['category_name'] ?></td>
-                                <td>
-                                    <a class="btn btn-success btn-sm"
-                                        href="?page=tambah-category&edit=<?= $category['id'] ?>">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <form class="d-inline" action="?page=category&delete=<?= $category['id'] ?>"
-                                        method="post" onclick="return confirm('Are you sure you want to delete?')">
-                                        <button type="submit" class="btn btn-warning btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $key + 1 ?></td>
+                                    <td><?php echo $category['category_name'] ?></td>
+                                    <td>
+                                        <a class="btn btn-success btn-sm"
+                                            href="?page=tambah-category&edit=<?= $category['id'] ?>">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <form class="d-inline" action="?page=category&delete=<?= $category['id'] ?>"
+                                            method="post" onclick="return confirm('Are you sure you want to delete?')">
+                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             <?php
                             }
                             ?>
