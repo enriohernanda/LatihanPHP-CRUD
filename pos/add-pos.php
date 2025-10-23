@@ -1,3 +1,15 @@
+<?php
+include '../config/koneksi.php';
+
+$queryCat = mysqli_query($koneksi, "SELECT * FROM categories");
+$fetchCats = mysqli_fetch_all($queryCat, MYSQLI_ASSOC);
+
+// query product
+$queryProducts = mysqli_query($koneksi, "SELECT c.category_name, p.* FROM products p LEFT JOIN categories c ON c.id = p.category_id");
+$fetchProducts = mysqli_fetch_all($queryProducts, MYSQLI_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,56 +26,27 @@
 <body>
     <!-- container-fluid -->
     <div class="container-fluid container-pos">
+        <div id="card">
+            <!-- <h3>Nama Product</h3>
+        <p>Description Product</p> -->
+        </div>
         <div class="row h-100">
             <div class="col-md-7 product-section">
                 <div class="mb-4">
-                    <h4 class="mb-3"><i class="bi bi-shop"></i>
-                        Product</h4>
+                    <h4 class="mb-3" id="product-title"><i class="bi bi-shop"></i>
+                        Data Product
+                    </h4>
                     <input type="text" id="searchProduct" class="form-control search-box" placeholder="Find Product...">
                 </div>
                 <div class="mb-4">
-                    <button class="btn btn-primary category-btn active">All Menu</button>
-                    <button class="btn btn-outline-primary category-btn">Food</button>
-                    <button class="btn btn-outline-primary category-btn">Drink</button>
-                    <button class="btn btn-outline-primary category-btn">Snack</button>
+                    <button class="btn btn-primary category-btn active" onclick="filterCategory('all', this)">All
+                        Menu</button>
+                    <?php foreach ($fetchCats as $cat): ?>
+                        <button class="btn btn-outline-primary category-btn"
+                            onclick="filterCategory('<?php echo $cat['category_name'] ?>', this)"><?php echo $cat['category_name'] ?></button>
+                    <?php endforeach ?>
                 </div>
                 <div class="row" id="productGrid">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-card">
-                            <div class="product-img">
-                                <img src="../assets/uploads/nasgor.jpg" alt="" width="100%">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-secondary badge-category">Makanan</span>
-                                <h6 class="card-title mt-2 mb-2">Nasi Goreng</h6>
-                                <p class="card-text text-primary fw-bold">Rp. 25.000,-</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-card">
-                            <div class="product-img">
-                                <img src="../assets/uploads/burger.jpg" alt="" width="100%">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-secondary badge-category">Makanan</span>
-                                <h6 class="card-title mt-2 mb-2">Burger</h6>
-                                <p class="card-text text-primary fw-bold">Rp. 40.000,-</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-card">
-                            <div class="product-img">
-                                <img src="../assets/uploads/es_teler.jpg" alt="" width="100%">
-                            </div>
-                            <div class="card-body">
-                                <span class="badge bg-secondary badge-category">Minuman</span>
-                                <h6 class="card-title mt-2 mb-2">Es Teler</h6>
-                                <p class="card-text text-primary fw-bold">Rp. 10.000,-</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="col-md-5 cart-section">
@@ -108,73 +91,18 @@
             </div>
         </div>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
 
     <script>
-        // javascript variable : let, var, const
-        // php variable = $define, const
-
-        let nama = "enrio hernanda";
-        var name = "bambang pamungkas";
-        const fullname = "wahyudin kamal";
-        // const : tetap tidak boleh merubah nilai
-        // document.write()
-        // console.log({
-        //     "nama": name,
-        //     "fullname": fullname
-        // });
-        // alert(nama);
-
-        let angka1 = 10;
-        let angka2 = 20;
-        console.log(angka1 + angka2);
-        console.log(angka1 - angka2);
-        console.log(angka1 / angka2);
-        console.log(angka1 * angka2);
-        console.log(angka1 % angka2);
-        console.log(angka1 ** angka2);
-
-        // operator penugasan
-        let x = 10;
-        x += 5; //15
-        console.log(x);
-
-        // operator pembandingan
-        //  >, <, =, ==, ===, !==
-        let a = 1;
-        let b = 1;
-        if (a == b) {
-            console.log("sama");
-        } else {
-            console.log("tidak sama");
-        }
-
-        console.log(a >= b);
-        console.log(a <= b);
-
-        // operator logika
-        // &&, AND, OR, ||, !: tidak / not
-        let umur = 20;
-        let punyaSim = true;
-        if (umur > 17 && punyaSim) {
-            console.log("boleh mengemudi");
-        } else {
-            console.log("tidak boleh mengemudi");
-        }
-
-        // array : sebuah tipe data yang bisa memiliki nilai lebih dari 1
-        let buah = ['pisang', 'salak', 'semangka'];
-        console.log("buah di keranjang:", buah);
-        console.log("saya mau buah", buah[1]);
-        buah[1] = "Nanas";
-        console.log("buah baru:", buah);
-        buah.push('Pepaya');
-        console.log("Buah", buah);
-        buah.pop();
-        console.log("Buah", buah);
+        const products = <?php echo json_encode($fetchProducts); ?>
     </script>
+
+    <script src="../assets/js/enrio.js"></script>
+
 </body>
 
 </html>
