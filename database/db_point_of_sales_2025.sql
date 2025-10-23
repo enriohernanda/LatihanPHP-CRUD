@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2025 at 10:07 AM
+-- Generation Time: Oct 23, 2025 at 10:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,7 +54,7 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `order_code` varchar(25) NOT NULL,
   `order_date` datetime NOT NULL,
-  `order_amout` decimal(10,2) DEFAULT NULL,
+  `order_amount` decimal(10,2) DEFAULT NULL,
   `order_change` decimal(10,2) DEFAULT NULL,
   `order_status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -63,7 +63,7 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_code`, `order_date`, `order_amout`, `order_change`, `order_status`) VALUES
+INSERT INTO `orders` (`id`, `order_code`, `order_date`, `order_amount`, `order_change`, `order_status`) VALUES
 (2, 'ABC-20250802', '2025-10-21 14:28:51', NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -111,13 +111,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `product_name`, `product_photo`, `product_price`, `product_description`, `is_active`, `created_at`, `updated_at`) VALUES
-(10, 10, 'Cheesecake', 'assets/uploads/1761031003-cheesecake.jpg', 50000.00, 'A soft cake made from cream cheese, eggs, and sugar, usually topped with a biscuit crust. It can be served with fruit, chocolate, or caramel sauce.', 0, '2025-10-20 06:35:53', '2025-10-20 06:35:53'),
+(10, 9, 'Cheesecake', 'assets/uploads/1761203387-cheesecake.jpg', 50000.00, 'A soft cake made from cream cheese, eggs, and sugar, usually topped with a biscuit crust. It can be served with fruit, chocolate, or caramel sauce.', 0, '2025-10-20 06:35:53', '2025-10-20 06:35:53'),
 (11, 9, 'Es Teler', 'assets/uploads/es_teler.jpg', 10000.00, 'A mixture of avocado, jackfruit, young coconut, and grass jelly, served with sweetened condensed milk and syrup.', 0, '2025-10-20 06:53:26', '2025-10-20 06:53:26'),
 (12, 8, 'Nasi Goreng ', 'assets/uploads/nasgor.jpg', 20000.00, 'Rice fried with onions, soy sauce, and chili sauce, often served with a fried egg, chicken, or shrimp.', 0, '2025-10-20 06:54:57', '2025-10-20 06:54:57'),
 (13, 8, 'Burger', 'assets/uploads/burger.jpg', 45000.00, 'A patty filled with roast beef, cheese, vegetables, and sauce, served with fries.', 0, '2025-10-20 07:12:49', '2025-10-20 07:12:49'),
-(21, 8, ' Milkshake', 'assets/uploads/1761030974-milkshakes.jpg', 15000.00, 'Milkshakes mantap', 0, '2025-10-21 07:16:14', '2025-10-21 07:16:14'),
-(22, 10, 'wkwkwkwk', 'assets/uploads/1761031289-mcr1.jpg', 99999999.00, 'gatau males pen beli truk', 0, '2025-10-21 07:18:33', '2025-10-21 07:18:33'),
-(23, 11, 'testingg', 'assets/uploads/1761031190-xiaomi-pad-7-pro-3840x2160-19801.jpg', 909090.00, 'hoammmm', 0, '2025-10-21 07:19:50', '2025-10-21 07:19:50');
+(21, 8, ' Milkshake', 'assets/uploads/1761030974-milkshakes.jpg', 15000.00, 'Milkshakes mantap', 0, '2025-10-21 07:16:14', '2025-10-21 07:16:14');
 
 -- --------------------------------------------------------
 
@@ -163,8 +161,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `role_id`, `deleted_at`) VALUES
-(1, 'Enrio', 'enrio@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-10-16 01:59:30', '2025-10-21 03:33:18', 1, NULL),
-(3, 'enrio hernanda', 'hernanda@gmail.com', '12345678', '2025-10-16 02:09:57', '2025-10-21 01:14:34', 2, NULL),
+(1, 'Enrio Hernanda', 'enrio@gmail.com', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '2025-10-16 01:59:30', '2025-10-23 01:21:41', 1, NULL),
+(3, 'enrio azaaaa', 'hernanda@gmail.com', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', '2025-10-16 02:09:57', '2025-10-23 01:21:24', 2, NULL),
 (5, 'enrio nanda', 'nanda@gmail.com', '13774352b79db3dd22b8a8dedf9403c69b2e6dbe', '2025-10-16 07:34:56', '2025-10-21 04:01:34', 2, NULL),
 (6, 'alan', 'alan@gmail.com', '7c222fb2927d828af22f592134e8932480637c0d', '2025-10-16 07:53:55', '2025-10-21 03:52:44', NULL, NULL),
 (9, 'budi', 'budi@gmail.com', 'budi123', '2025-10-20 01:13:21', '2025-10-20 02:06:18', NULL, '2025-10-20 09:06:18'),
